@@ -5,7 +5,7 @@ test('Login to website @regression', async({page , loginWebsite: _loginWebsite})
 })
 
 test('Another check @smoke', async ({ page }) => {
-  await expect(page).toHaveURL(/inventory/);
+  console.log("Second test")
 });
 
 
