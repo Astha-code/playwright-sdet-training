@@ -23,7 +23,15 @@ pipeline {
 
         stage('Install Playwright Browsers') {
             steps {
-                sh 'npx playwright install --with-deps'
+                script {
+            if (params.TEST_SUITE == 'smoke') {
+                sh 'npx playwright test --grep @smoke'
+            } else if (params.TEST_SUITE == 'regression') {
+                sh 'npx playwright test --grep @regression'
+            } else {
+                sh 'npx playwright test'
+            }
+        }
             }
         }
 

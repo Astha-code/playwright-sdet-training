@@ -1,8 +1,13 @@
 import {test, expect} from '../fixtures/test-fixtures'
 
-test('Login to website', async({page , loginWebsite: _loginWebsite}) => {
+test('Login to website @regression', async({page , loginWebsite: _loginWebsite}) => {
         await expect(page).toHaveURL(/inventory/)
 })
+
+test('Another check @smoke', async ({ page }) => {
+  await expect(page).toHaveURL(/inventory/);
+});
+
 
 // test('Login to website', async({page}) => {
 //         await page.goto('/')
