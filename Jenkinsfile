@@ -32,5 +32,18 @@ pipeline {
                 sh 'npx playwright test'
             }
         }
+        stage('Publish Report') {
+            steps {
+                publishHTML([
+                    reportDir: 'playwright-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Playwright Test Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
+                ])
+            }
+        }
+
     }
 }
