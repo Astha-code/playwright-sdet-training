@@ -23,7 +23,13 @@ pipeline {
 
         stage('Install Playwright Browsers') {
             steps {
-                script {
+                sh 'npx playwright install --with-deps'
+            }
+        }
+
+        stage('Run Playwright Tests') {
+    steps {
+        script {
             if (params.TEST_SUITE == 'smoke') {
                 sh 'npx playwright test --grep @smoke'
             } else if (params.TEST_SUITE == 'regression') {
@@ -32,14 +38,9 @@ pipeline {
                 sh 'npx playwright test'
             }
         }
-            }
-        }
+    }
+}
 
-        stage('Run Playwright Tests') {
-            steps {
-                sh 'npx playwright test'
-            }
-        }
         stage('Publish Report') {
             steps {
                 publishHTML([
@@ -51,7 +52,7 @@ pipeline {
                     allowMissing: false
                 ])
             }
-        }
+}
 
     }
 }
